@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<?php
+    include_once 'config.php';
+
+    $query = $pdo->prepare('SELECT * FROM blog_posts ORDER BY id DESC');
+    $query->execute();
+
+    $blogPosts = $query->fetchAll(PDO::FETCH_ASSOC);
+?>
 <html>
 <head>
     <meta charset="utf-8">
@@ -8,28 +16,42 @@
 </head>
 <body>
     <div class="container">
+
         <div class="row">
             <div class="col-md-12">
                 <h1>Title</h1>
             </div>
         </div>
-        <dov class="row">
+
+        <div class="row">
             <div class="col-md-8">
-                <div class="blog-post">
-                    <h2>Sample title</h2>
-                    <p><a href="">by Alex</a> on XX/XX/XXXX</p>
-                    <div class="blog-post-image">
-                        <img src="" alt="">
-                    </div>
-                    <div class="blog-post-content">
-                        The Los Alamos Laboratory, also known as Project Y, was a secret laboratory established by the Manhattan Project and operated by the University of California during World War II. Its mission was to design and build the first atomic bombs. Robert Oppenheimer was its first director, from 1943 to December 1945, when he was succeeded by Norris Bradbury. For scientists freely to discuss their work while preserving security, the laboratory was located in a remote part of New Mexico. The wartime laboratory occupied buildings that had once been part of the Los Alamos Ranch School.
-                    </div>
-                </div>
+
+                <!-- Prints blog posts obtained from database -->
+                <?php foreach ($blogPosts as $blogPost): ?>
+                        <div class="blog-post">
+                            <h2><?=$blogPost['title']?></h2>
+                            <p><a href="">by Alex</a> on XX/XX/XXXX</p>
+                            <div class="blog-post-image">
+                                <img src="images/placeholder_img.jpg" alt="">
+                            </div>
+                            <div class="blog-post-content">
+                                <?=$blogPost['content']?>
+                            </div>
+                        </div>
+                <?php endforeach ?>
+
             </div>
             <div class="col-md-4">
-                Sidebar
+                Jackie Chan DC Racing, formerly known as DC Racing, is a racing team that currently competes in the FIA World Endurance Championship and Asian Le Mans Series. The team is co-owned by Asian Le Mans champion David Cheng and actor Jackie Chan. Partnering with Jota Sport in WEC, the team fields two Oreca 07s: the No. 37 for Cheng, Alex Brundle and Tristan Gommendy, and the No. 38 for Ho-Pin Tung, Thomas Laurent and Oliver Jarvis.
             </div>
-        </dov>
+        </div>
+
+        <div class="row">
+            <footer>
+                Footer
+            </footer>
+        </div>
+
     </div>
 </body>
 </html>
