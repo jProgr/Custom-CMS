@@ -2,10 +2,17 @@
 <?php
     include_once '../config.php';
 
-    $query = $pdo->prepare('SELECT * FROM blog_posts ORDER BY id DESC');
-    $query->execute();
-
-    $blogPosts = $query->fetchAll(PDO::FETCH_ASSOC);
+    $result = false;
+    if (!empty($_POST))
+    {
+        $sql_query = 'INSERT INTO blog_posts (title, content) VALUES (:title, :content)';
+        $query = $pdo->prepare($sql_query);
+        $result = $query->execute(
+        [
+            'title' => $_POST['title'],
+            'content' => $_POST['content']
+        ]);
+    }
 ?>
 <html>
 <head>
@@ -25,25 +32,25 @@
 
         <div class="row">
             <div class="col-md-8">
-                <h2>Posts</h2>
-                <a class="btn btn-primary" href="insert-post.php">New post</a>
-                <table class="table">
-                    <tr>
-                        <th>Title</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
+                <h2>New post</h2>
+                <p><a class="btn btn-default" href="posts.php">Go back</a></p>
 
-                    <!-- Prints list of blogposts from DB -->
-                    <?php foreach ($blogPosts as $blogPost): ?>
-                        <tr>
-                            <td><?=$blogPost['title']?></td>
-                            <td>Edit</td>
-                            <td>Delete</td>
-                        </tr>
-                    <?php endforeach ?>
-                    
-                </table>
+                <?php
+                    if ($result)
+                    {
+                        echo '<div class="alert alert-success">Posted!</div>';
+                    }
+                ?>
+
+                <form action="insert-post.php" method="post">
+                    <div class="form-group">
+                        <label for="inputTitle">Title</label>
+                        <input class="form-control" type="text" name="title" id="inputTitle">
+                    </div>
+                    <textarea class="form-control" name="content" id="inputContent" rows="5"></textarea>
+                    <input class="btn btn-primary" type="submit" value="Save">
+                </form>
+                
             </div>
             <div class="col-md-4">
                 Jackie Chan DC Racing, formerly known as DC Racing, is a racing team that currently competes in the FIA World Endurance Championship and Asian Le Mans Series. The team is co-owned by Asian Le Mans champion David Cheng and actor Jackie Chan. Partnering with Jota Sport in WEC, the team fields two Oreca 07s: the No. 37 for Cheng, Alex Brundle and Tristan Gommendy, and the No. 38 for Ho-Pin Tung, Thomas Laurent and Oliver Jarvis.
