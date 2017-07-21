@@ -18,7 +18,7 @@
 
         <div class="row">
             <div class="col-md-8">
-                <ul><li><a href="posts.php">Manage blog</a></li></ul>
+                <ul><li><a href="<?php echo BASE_URL;?>admin/posts">Manage blog</a></li></ul>
             </div>
             <div class="col-md-4">
                 Jackie Chan DC Racing, formerly known as DC Racing, is a racing team that currently competes in the FIA World Endurance Championship and Asian Le Mans Series. The team is co-owned by Asian Le Mans champion David Cheng and actor Jackie Chan. Partnering with Jota Sport in WEC, the team fields two Oreca 07s: the No. 37 for Cheng, Alex Brundle and Tristan Gommendy, and the No. 38 for Ho-Pin Tung, Thomas Laurent and Oliver Jarvis.
@@ -29,7 +29,7 @@
             <div class="col-md-12">
                 <footer>
                     Footer<br />
-                    <a href="admin/index.php">Admin panel</a>
+                    <a href="<?php echo BASE_URL;?>admin">Admin panel</a>
                 </footer>
             </div>
         </div>
