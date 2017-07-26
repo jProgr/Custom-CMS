@@ -1,0 +1,19 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+
+    <!-- Prints blog posts obtained from database -->
+    {% for blogPost in blogPosts %}
+        <div class="blog-post">
+            <h2>{{ blogPost.title }}</h2>
+            <p><a href="">by Alex</a> on XX/XX/XXXX</p>
+            <div class="blog-post-image">
+                <img src="images/placeholder_img.jpg" alt="">
+            </div>
+            <div class="blog-post-content">
+                {{ blogPost.content }}
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
