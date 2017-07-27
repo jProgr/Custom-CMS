@@ -4,22 +4,37 @@
     error_reporting(E_ALL);
 
     require_once '../vendor/autoload.php';
-    include_once '../config.php';
 
     // Gets base url
     $baseDir = str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
     $baseUrl = 'http://' . $_SERVER['HTTP_HOST'] . $baseDir;
     define('BASE_URL', $baseUrl);
 
+    // Loads environment variables
+    $dotenv = new \Dotenv\Dotenv(__DIR__ . '/..');
+    $dotenv->load();
+
+    // DB config
+    use Illuminate\Database\Capsule\Manager as Capsule;
+
+    $capsule = new Capsule;
+
+    $capsule->addConnection([
+        'driver'    => 'mysql',
+        'host'      => getenv('DB_HOST'),
+        'database'  => getenv('DB_NAME'),
+        'username'  => getenv('DB_USER'),
+        'password'  => getenv('DB_PASS'),
+        'charset'   => 'utf8',
+        'collation' => 'utf8_unicode_ci',
+        'prefix'    => '',
+    ]);
+
+    $capsule->setAsGlobal();
+    $capsule->bootEloquent();
+
+    // Routing config
     $route = isset($_GET['route'])?$_GET['route']:'/';  //$route = $_GET['route'] ?? '/'; // If $_GET['route'] is defined then $route =  $_GET['route'], otherwise equals '/'
-    
-    function render($fileName, $params = [])
-    {
-        ob_start();
-        extract($params);
-        include $fileName;
-        return ob_get_clean();
-    }
 
     use Phroute\Phroute\RouteCollector;
     $router = new RouteCollector();
