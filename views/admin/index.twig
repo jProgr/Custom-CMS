@@ -1,5 +1,8 @@
 {% extends "layout.twig" %}
 
 {% block content %}
-    <ul><li><a href="{{ 'admin/posts' | url }}">Manage blog</a></li></ul>
+    <ul>
+        <li><a href="{{ 'admin/posts' | url }}">Manage blog</a></li>
+        <li><a href="{{ 'admin/users' | url }}">Manage users</a></li>
+    </ul>
 {% endblock %}
