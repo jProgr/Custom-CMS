@@ -5,6 +5,8 @@
 
     require_once '../vendor/autoload.php';
 
+    session_start();
+
     // Gets base url
     $baseDir = str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
     $baseUrl = 'http://' . $_SERVER['HTTP_HOST'] . $baseDir;
@@ -41,6 +43,7 @@
 
     // Routes
 
+    $router->controller('/auth', App\Controllers\AuthController::class);
     $router->controller('/admin', App\Controllers\Admin\IndexController::class);
     $router->controller('/admin/posts', App\Controllers\Admin\PostController::class);
     $router->controller('/admin/users', App\Controllers\Admin\UserController::class);

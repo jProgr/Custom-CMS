@@ -1,8 +1,12 @@
 {% extends "layout.twig" %}
 
 {% block content %}
+    <p>
+        Welcome {{ user.name }}
+    </p>
     <ul>
         <li><a href="{{ 'admin/posts' | url }}">Manage blog</a></li>
         <li><a href="{{ 'admin/users' | url }}">Manage users</a></li>
+        <li><a href="{{ 'auth/logout' | url }}">Logout</a></li>
     </ul>
 {% endblock %}
