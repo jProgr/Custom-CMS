@@ -7,9 +7,11 @@
         <div class="blog-post">
             <h2>{{ blogPost.title }}</h2>
             <p><a href="">by Alex</a> on XX/XX/XXXX</p>
-            <div class="blog-post-image">
-                <img src="images/placeholder_img.jpg" alt="">
-            </div>
+            {% if blogPost.img_url %}
+                <div class="blog-post-image">
+                    <img class="img-responsive" src="{{ blogPost.img_url }}" alt="">
+                </div>
+            {% endif %}
             <div class="blog-post-content">
                 {{ blogPost.content }}
             </div>

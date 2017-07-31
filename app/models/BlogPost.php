@@ -7,6 +7,6 @@
     class BlogPost extends Model
     {
         protected $table = 'blog_posts';
-        protected $fillable = ['title', 'content'];
+        protected $fillable = ['title', 'content', 'img_url'];
     }
 ?>
